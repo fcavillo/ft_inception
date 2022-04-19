@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Start services
+# Start services OLD FT_SERVER
 service nginx start
 service mysql start
 service php7.3-fpm start

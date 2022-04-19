@@ -1,6 +1,6 @@
 <?php
 /**
- * La configuration de base de votre installation WordPress.
+ * La configuration de base de votre installation WordPress. OLD FT_SERVER
  *
  * Ce fichier contient les réglages de configuration suivants : réglages MySQL,
  * préfixe de table, clés secrètes, langue utilisée, et ABSPATH.

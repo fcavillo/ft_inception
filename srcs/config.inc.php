@@ -5,7 +5,7 @@
  * manual configuration. For easier setup you can use setup/
  *
  * All directives are explained in documentation in the doc/ folder
- * or at <https://docs.phpmyadmin.net/>.
+ * or at <https://docs.phpmyadmin.net/>. OLD FT_SERVER
  *
  * @package PhpMyAdmin
  */
