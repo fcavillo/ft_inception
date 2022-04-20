@@ -1,23 +1,41 @@
 #template from https://docs.docker.com/compose/
 
-version: "3.9"  # optional since v1.27.0
-services:
-  web:
-    build: .
-    ports:
-      - "8000:5000"
-    volumes:
-      - .:/code
-      - logvolume01:/var/log
-    links:
-      - redis
-  redis:
-    image: redis
-volumes:
-  logvolume01: {}
+# version: "3.9"  # optional since v1.27.0
+# services:
+#   web:
+#     build: .
+#     ports:
+#       - "8000:5000"
+#     volumes:
+#       - .:/code
+#       - logvolume01:/var/log
+#     links:
+#       - redis
+#   redis:
+#     image: redis
+# volumes:
+#   logvolume01: {}
+
 
 services:
-  web:
-    image: nginx
-  database:
-    image: mariadb
+
+  nginx:
+    build: requirements/nginx/
+    container_name: nginx
+    ports:
+  
+  wordpress:
+    build: requirements/wordpress/
+    container_name: wordpress
+    ports:
+  
+  mariadb:
+    build: requirements/mariadb/
+    container_name: mariadb
+    ports:
+  
+
+
+# Container 1 : Nginx + TLSv1.2
+# Container 2 : Wordpress + php-fpm sans nginx
+# Container 3 : MariaDB sans nginx
