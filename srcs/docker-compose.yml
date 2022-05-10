@@ -23,16 +23,19 @@ services:
     build: requirements/nginx/
     container_name: nginx
     ports:
-  
+     volumes: /home/fcavillo/data #same as wordpress
+ 
   wordpress:
     build: requirements/wordpress/
     container_name: wordpress
     ports:
-  
+     volumes: /home/fcavillo/data
+ 
   mariadb:
     build: requirements/mariadb/
     container_name: mariadb
     ports:
+    volumes: /home/fcavillo/data
   
 
 
