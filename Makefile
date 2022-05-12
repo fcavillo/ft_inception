@@ -6,35 +6,27 @@
 #    By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 01:49:00 by fcavillo          #+#    #+#              #
-#    Updated: 2022/04/19 11:57:46 by fcavillo         ###   ########.fr        #
+#    Updated: 2022/05/12 15:26:41 by fcavillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ircserv
+NAME = inception
 
-CC	= clang++
+all : clean build
 
-CFLAGS	= -Wall -Wextra -Werror -std=c++98
+#starts all services from the yml file
+build : 
+	docker-compose -f srcs/docker-compose.yml up --build
 
-SRCS =	main.cpp \
+#stops containers and removes containers, networks, volumes, and images created by up
+down :
+	docker-compose down
 
-
-OBJS = $(SRCS:.cpp=.o)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
-
-${NAME}: $(OBJS)
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-
-all : ${NAME}
-
+#removes all previous container related data
 clean:
-	rm -f $(OBJS)
+	docker system prune
 
 fclean: clean
-	rm -f ${NAME}
 
-re: fclean all
 
-.PHONY:	all clean re fclean re
+.PHONY:	all clean fclean build down
