@@ -22,24 +22,34 @@ services:
   nginx:
     build: requirements/nginx/
     container_name: nginx
+    restart: always
     ports:
   #  - "80:80"
-    - "443:443"
+      - "443:443"
     #  volumes: /home/fcavillo/data #same as wordpress
- 
+    networks:
+      the_network:
+
+
   # wordpress:
   #   build: requirements/wordpress/
   #   container_name: wordpress
   #   ports:
   #    volumes: /home/fcavillo/data
  
-  # mariadb:
-  #   build: requirements/mariadb/
+  mariadb:
+    build: requirements/mariadb/
+    restart: always
   #   container_name: mariadb
-  #   ports:
+    ports:
+      - "3306:3306"
   #   volumes: /home/fcavillo/data
+    env_file: .env
+    networks:
+      the_network:
   
-
+networks:
+  the_network:
 
 # Container 1 : Nginx + TLSv1.2
 # Container 2 : Wordpress + php-fpm sans nginx
