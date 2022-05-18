@@ -6,13 +6,20 @@
 #    By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 01:49:00 by fcavillo          #+#    #+#              #
-#    Updated: 2022/05/13 14:10:19 by fcavillo         ###   ########.fr        #
+#    Updated: 2022/05/16 15:14:16 by fcavillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = inception
 
 all : build
+
+stop:
+	sudo systemctl stop nginx
+	sudo systemctl disable nginx
+	sudo service nginx stop
+	sudo service mysql stop
+	
 
 #starts all services from the yml file
 build : 

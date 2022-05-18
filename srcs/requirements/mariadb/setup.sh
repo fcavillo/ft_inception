@@ -1,7 +1,14 @@
 #!/bin/bash
 
+echo "mysql 0"
 service mysql start
+echo "mysql 3"
+chown -R mysql /var/lib/mysql
+echo "mysql 1"
 mysql_install_db
+echo "mysql 2"
+
+
 
 # Create MySQL database profile
 mysql --execute "CREATE USER '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';\
