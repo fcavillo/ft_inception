@@ -2,24 +2,20 @@ FROM debian:buster
 
 MAINTAINER Florian Cavillon <fcavillo@student.42.fr>
 
-RUN apt-get -y update
+RUN apt-get -y update && apt-get -y install php7.3 php-mysqli php-fpm mariadb-client sendmail
+COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d
 
-# INSTALL NGINX
-RUN apt-get -y install nginx
+# ADD https://wordpress.org/wordpress-5.7.2.tar.gz /var/www/ 
+COPY ./tools/wordpress_download /var/www/
+RUN cd /var/www && tar -xzvf wordpress_download && \
+    rm -f /var/www/wordpress_download && \
+    rm -f /var/www/wordpress/wp-config-sample.php
 
-# INSTALL MYSQL
-RUN apt-get -y install mariadb-server
+ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /var/www
+RUN cd /var/www && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
-# INSTALL PHP
-RUN apt-get -y install php7.3 php-mysql php-fpm php-cli php-mbstring
+RUN mkdir ./run/php/
 
-# INSTALL TOOLS
-RUN apt-get -y install wget
-
-COPY ./srcs/* srcs/
-
-EXPOSE 80
-EXPOSE 443
-
-RUN chmod +x ./srcs/setup.sh
-CMD bash ./srcs/setup.sh
+COPY tools/setup.sh /
+RUN chmod 777 /setup.sh
+ENTRYPOINT ["sh", "/setup.sh"]

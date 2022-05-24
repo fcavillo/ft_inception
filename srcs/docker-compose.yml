@@ -21,33 +21,62 @@ services:
 
   nginx:
     build: requirements/nginx/
-    container_name: nginx
+    container_name: nginx_container
     restart: always
+    # depends_on:
+    #   - wordpress
     ports:
-  #  - "80:80"
       - "443:443"
-    #  volumes: /home/fcavillo/data #same as wordpress
+    # volumes:
+    #   - wp_data:/var/www/wordpress
     networks:
       the_network:
+    env_file: .env
 
 
   # wordpress:
   #   build: requirements/wordpress/
-  #   container_name: wordpress
+  #   container_name: wp_container
   #   ports:
-  #    volumes: /home/fcavillo/data
- 
+  #     - "9000:9000"
+  #   restart: always
+  #   depends_on:
+  #     - mariadb
+  #   volumes:
+  #    - wp_data:/var/www/wordpress      
+  #   env_file: .env
+  #   networks:
+  #     the_network:
+
   mariadb:
+#    image: mariadb:latest
+    container_name: mdb_container
     build: requirements/mariadb/
     restart: always
-  #   container_name: mariadb
     ports:
       - "3306:3306"
-  #   volumes: /home/fcavillo/data
+    volumes:
+     - db_data:/var/lib/mysql      
     env_file: .env
     networks:
       the_network:
-  
+
+volumes:
+  db_data:
+    name: db_data
+    driver: local
+    driver_opts:
+      device: /home/user42/data/db_data
+      o: bind
+      type: none
+  # wp_data:
+  #   name: wp_data
+  #   driver: local
+  #   driver_opts:
+  #     device: /home/user42/data/wp_data
+  #     o: bind
+  #     type: none
+
 networks:
   the_network:
 
