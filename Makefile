@@ -6,7 +6,7 @@
 #    By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 01:49:00 by fcavillo          #+#    #+#              #
-#    Updated: 2022/05/24 14:10:12 by fcavillo         ###   ########.fr        #
+#    Updated: 2022/05/25 11:13:25 by fcavillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ build :
 
 #stops containers and removes containers, networks, volumes, and images created by up
 down:
-		docker-compose -f  srcs/docker-compose.yml down -v
+	docker-compose -f  srcs/docker-compose.yml down -v
 
 #removes all previous container related data
 clean:
@@ -35,5 +35,8 @@ clean:
 
 fclean: clean
 
+volumes: 
+	sudo rm -rf /home/user42/data/wp_data/*
+	sudo rm -rf /home/user42/data/db_data/*
 
 .PHONY:	all clean fclean build down

@@ -34,19 +34,19 @@ services:
     env_file: .env
 
 
-  # wordpress:
-  #   build: requirements/wordpress/
-  #   container_name: wp_container
-  #   ports:
-  #     - "9000:9000"
-  #   restart: always
-  #   depends_on:
-  #     - mariadb
-  #   volumes:
-  #    - wp_data:/var/www/wordpress      
-  #   env_file: .env
-  #   networks:
-  #     the_network:
+  wordpress:
+    build: requirements/wordpress/
+    container_name: wp_container
+    ports:
+      - "9000:9000"
+    restart: always
+    depends_on:
+      - mariadb
+    volumes:
+     - wp_data:/var/www/wordpress      
+    env_file: .env
+    networks:
+      the_network:
 
   mariadb:
 #    image: mariadb:latest
@@ -69,13 +69,13 @@ volumes:
       device: /home/user42/data/db_data
       o: bind
       type: none
-  # wp_data:
-  #   name: wp_data
-  #   driver: local
-  #   driver_opts:
-  #     device: /home/user42/data/wp_data
-  #     o: bind
-  #     type: none
+  wp_data:
+    name: wp_data
+    driver: local
+    driver_opts:
+      device: /home/user42/data/wp_data
+      o: bind
+      type: none
 
 networks:
   the_network:
