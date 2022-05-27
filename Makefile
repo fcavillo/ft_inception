@@ -6,13 +6,13 @@
 #    By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 01:49:00 by fcavillo          #+#    #+#              #
-#    Updated: 2022/05/25 11:13:25 by fcavillo         ###   ########.fr        #
+#    Updated: 2022/05/27 15:17:01 by fcavillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = inception
 
-all : build
+all : hosts build
 
 stop: down clean
 	sudo systemctl stop nginx
@@ -25,6 +25,15 @@ stop: down clean
 build : 
 	docker-compose -f srcs/docker-compose.yml up --build --remove-orphans
 
+hosts :
+	if grep -R "fcavillo.42.fr" /etc/hosts > /dev/null; then \
+		echo 'fcavillo.42.fr already set as host'; \
+	else \
+		echo '127.0.0.1 fcavillo.42.fr' | sudo tee -a /etc/hosts > /dev/null; \
+		echo '127.0.0.1 www.fcavillo.42.fr' | sudo tee -a /etc/hosts > /dev/null; \
+		echo 'fcavillo.42.fr added to hosts'; \
+	fi
+		
 #stops containers and removes containers, networks, volumes, and images created by up
 down:
 	docker-compose -f  srcs/docker-compose.yml down -v
