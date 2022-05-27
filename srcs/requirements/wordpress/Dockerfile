@@ -3,7 +3,7 @@ FROM debian:buster
 MAINTAINER Florian Cavillon <fcavillo@student.42.fr>
 
 RUN apt-get -y update && apt-get -y install php7.3 php-mysqli php-fpm mariadb-client sendmail
-COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d
+#COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d
 
 #Putting the wp zip in the config
 COPY ./tools/wordpress_download /var/www/
