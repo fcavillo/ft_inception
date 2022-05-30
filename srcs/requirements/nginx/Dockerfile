@@ -10,10 +10,11 @@ RUN mkdir /var/www/fcavillo.42.fr
 
 RUN chown -R www-data: /var/www/*
 RUN chmod -R 755 /var/www/*
-RUN rm /etc/nginx/sites-available/default 
-COPY nginx.conf /etc/nginx/sites-available/fcavillo.42.fr
-RUN rm /etc/nginx/sites-enabled/default 
+
+#RUN rm /etc/nginx/sites-available/default 
+COPY tools/nginx.conf /etc/nginx/sites-available/fcavillo.42.fr
 RUN ln -s /etc/nginx/sites-available/fcavillo.42.fr /etc/nginx/sites-enabled
+RUN rm /etc/nginx/sites-enabled/default 
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 

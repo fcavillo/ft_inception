@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "mysql setup 0"
+echo "mysql setup ..."
 service mysql start
 
 if mysql -hmariadb -u$MYSQL_USER -p$MYSQL_PASSWORD -e "use ${MYSQL_DATABASE_NAME}";
