@@ -4,17 +4,16 @@ echo 'Mariadb db is usable !'
 
 if  [ ! -f /var/www/wordpress/wp-config.php ]; then
     while  [ ! -f /var/www/wordpress/wp-config.php ]; do
-        echo 'Setting up db for wordpress ...'
+        echo 'Setting up wordpress ...'
         wp core config --allow-root --dbname=$MYSQL_DATABASE_NAME --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=mariadb:3306 --path='/var/www/wordpress'
     done
-    echo "Database created"
-    while ! wp core is-installed --allow-root --path='/var/www/wordpress'
-    do
+    # while ! wp core is-installed --allow-root --path='/var/www/wordpress'
+    # do
         echo "Installing wordpress and creating admin account ..."
         wp core install --allow-root --url='fcavillo.42.fr' --title='WordPress for ft_inception' --admin_user=$WP_LOGIN --admin_password=$WP_PASS  --admin_email="admin@admin.fr" --path='/var/www/wordpress'
-    done
+    # done
     echo "Wordpress installed !"
-#    wp user create --allow-root $WPU_1LOGIN otheruser@user.com --user_pass=$WPU_1PASS --role=contributor --path='/var/www/wordpress'
+    wp user create --allow-root $WPU_1LOGIN otheruser@user.com --user_pass=$WPU_1PASS --role=contributor --path='/var/www/wordpress'
 #    wp theme install --allow-root dark-mode --activate --path='/var/www/wordpress'
 fi
 echo 'Launching Wordpress'
