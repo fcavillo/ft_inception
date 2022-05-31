@@ -20,6 +20,5 @@ RUN mkdir ./run/php/
 COPY tools/setup.sh /
 RUN chmod 777 /setup.sh
 
-EXPOSE 9000
 
 ENTRYPOINT ["sh", "/setup.sh"]

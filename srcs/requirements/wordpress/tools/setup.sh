@@ -14,7 +14,6 @@ if  [ ! -f /var/www/wordpress/wp-config.php ]; then
     # done
     echo "Wordpress installed !"
     wp user create --allow-root $WPU_1LOGIN otheruser@user.com --user_pass=$WPU_1PASS --role=contributor --path='/var/www/wordpress'
-#    wp theme install --allow-root dark-mode --activate --path='/var/www/wordpress'
 fi
 echo 'Launching Wordpress'
 php-fpm7.3 -F --nodaemonize
